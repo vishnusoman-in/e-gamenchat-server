@@ -49,7 +49,7 @@ app.use(cors({
   origin: ["http://localhost:3000", "https://e-gamenchat-room.onrender.com"]
 }));//add values in prouction enviorment
 app.use("/assets", express.static(path.join(__dirname, "public/assets"))); // local storage directory
-
+//app.use(express.static(__dirname));
 
 var serverstate = 0;
 
@@ -136,11 +136,11 @@ const updatewinner = async(string) => {
 const storage = multer.diskStorage({
 
   destination: function (req, file, cb) {
-    cb(null, "public/assets");
+    cb(null, "public/assets");//path.join(__dirname, '/uploads/')
   },
 
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, Date.now() + file.originalname);
   },
 
 }); // this is from github from multer
